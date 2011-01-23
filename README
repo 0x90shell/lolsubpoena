@@ -1,0 +1,8 @@
+lolsubpoena is a basic command line twitter client for sending and receiving AES256 encrypted direct messages. it also includes a key generator for creating public/private encryption key pairs. the key exchange is diffie-hellman, so feel free to swap public keys with your friends over a compromised transport, such as gmail.
+
+dependencies:
+- python 2.6
+- python-oauth2 (which in turn depends on httplib2)
+- pycrypto
+
+disclaimer: if you're a political dissident or whatever please don't get pissed at me if your government executes you because i screwed up diffie-hellman. this was a jokey weekend learning project. use at your own peril. also my python isn't great, so read at your own peril too.
