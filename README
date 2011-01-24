@@ -16,7 +16,7 @@ let's say we have two users who want to communicate privately using twitter: @al
 - now they can begin communicating. bob sends alice a message:
 	- python lolsubpoena.py --send-msg alicebelieber92
 	- "hey alice, isn't it great that twitter can't even read our DMs now?"
-- alice gets the message as normal via twitter and she fires up lolsubpoena to read it:
+- alice gets the message as normal (but unreadable) via twitter and she fires up lolsubpoena to read it:
 	- python lolsubpoena.py --list-msg bobgagalover94
 - they can continue messaging for as long as they want with the current key. when they start getting paranoid, they can regenerate it by deleting their .public, .private and .secret files; then following the keygen.py instructions above again. this has the obvious side effect that messages sent using the previous key will now be unreadable.
 
