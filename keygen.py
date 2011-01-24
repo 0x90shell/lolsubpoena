@@ -35,5 +35,5 @@ elif sys.argv[1] == '--private':
 	
 	private = pow(public, r, p)
 	
-	writeToFile(sys.argv[3].split('.')[0] + '.private', str(private))
+	writeToFile(sys.argv[3].split('.')[0] + '.' + sys.argv[2].split('.')[0] + '.private', str(private))
 

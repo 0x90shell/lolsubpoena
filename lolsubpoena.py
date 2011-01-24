@@ -43,9 +43,15 @@ def getDM(token, secret, fromUser = None):
 			filteredData.append(i)
 	return filteredData
 
-def decryptAndPrintDM(dmObj, encryptionKey):
+def decryptAndPrintDM(dmObj):
+	sender = dmObj['sender_screen_name']
+	if sender in keys:
+		encryptionKey = keys[sender]
+	else:
+		encryptionKey = loadKey(twitterUser + '.' + sender, 'private', True)
+		keys[sender] = encryptionKey
 	plaintext = decrypt(decodeBase64(dmObj['text']), encryptionKey)
-	print dmObj['created_at'] + ' from ' + dmObj['sender_screen_name'] + ':'
+	print dmObj['created_at'] + ' from ' + sender + ':'
 	print plaintext
 	print '-----------------------------'
 
@@ -131,9 +137,9 @@ twitterBaseAPI = 'http://api.twitter.com/1'
 
 oauthConsumerKey, oauthConsumerSecret = oauthLoad('application')
 
+keys = {}
 twitterUser = sys.argv[1]
 accessToken, accessSecret = oauthLoad(twitterUser)
-encryptionKey = loadKey(twitterUser, 'private', True)
 
 if sys.argv[2] == '--get-token':
     requestToken, requestSecret = oauthRequestToken()
@@ -146,6 +152,7 @@ elif sys.argv[2] == '--send-dm':
     
     toUser = sys.argv[3]
     message = raw_input("Type your message (keep it short, the actual message will be a longer):\n")
+    encryptionKey = loadKey(twitterUser + '.' + toUser, 'private', True)
     encrypted = encodeBase64(encrypt(message, encryptionKey))
 
     if len(encrypted) <= 140:
@@ -167,5 +174,5 @@ elif sys.argv[2] == '--list-dm':
     
     dmList = getDM(accessToken, accessSecret, filterUser)
     for d in dmList:
-    	decryptAndPrintDM(d, encryptionKey)
+    	decryptAndPrintDM(d)
 	
