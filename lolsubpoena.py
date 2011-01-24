@@ -151,7 +151,7 @@ elif sys.argv[2] == '--send-dm':
     	dumpUsage()
     
     toUser = sys.argv[3]
-    message = raw_input("Type your message (keep it short, the actual message will be a longer):\n")
+    message = raw_input("Type your message (keep it short, the actual message will be longer):\n")
     encryptionKey = loadKey(twitterUser + '.' + toUser, 'private', True)
     encrypted = encodeBase64(encrypt(message, encryptionKey))
 
